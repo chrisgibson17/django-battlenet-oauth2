@@ -5,7 +5,12 @@ Basic class for getting Access Token &amp; Account Information from battlenet
 
 THIS LIBRARY IS NOT ASSOCIATED WITH, OR ENDORSED BY, BLIZZARD IN ANY WAY.
 
-Some caveats before you look at the example:
+##Installation
+
+Clone the repo: git clone git@github.com:chrisgibson17/django-battlenet-oauth2.git (or use GitHub client)
+Navigate to the local repo and run: (sudo) python setup.py install
+
+_Some caveats before you look at the example:_
 
 * `state_generator()` is for testing/example purposes only.  DO NOT USE THIS IN PRODUCTION.
 
@@ -64,7 +69,7 @@ N.B. It is recommended that your Key & Secret are stored as environment variable
 
 from django.http import HttpResponse
 
-from accounts.battlenet import BattleNet
+from battlenet import BattleNet
 
 from requests.exceptions import HTTPError
 
