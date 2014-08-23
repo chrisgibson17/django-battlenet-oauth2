@@ -30,23 +30,33 @@ the redirect location wasn't checked.
 
 ## Default Values
 
-Default values are
-    - key           = settings.BNET_KEY
-    - secret        = settings.BNET_SECRET
-    - redirect_uri  = settings.BNET_REDIRECT_URI
-    - scope         = 'wow.profile'
-    - region        = 'eu'
-    - access_token  = None
+Default values are:
+* key           = settings.BNET_KEY
+* secret        = settings.BNET_SECRET
+* redirect_uri  = settings.BNET_REDIRECT_URI
+* scope         = 'wow.profile'
+* region        = 'eu'
+* access_token  = None
 
-    If you haven't set key/secret/redirect_uri, it will throw an Exception when you initialize the class, unless you override the default, see below.
+If you haven't set key/secret/redirect_uri, it will throw an Exception when you initialize
+the class, unless you override the default, see below.
 
 
 #### Overriding default values
-    These can be overridden in the constructor like so:
+These can be overridden in the constructor like so:
 
-    bnet = BattleNet(key='Your key', secret='Your secret', region='us', scope='sc2.profile', redirect_uri='Your redirect uri', access_token='An access token if you have one')
+```python
+bnet = BattleNet(
+    key='Your key',
+    secret='Your secret',
+    region='us',
+    scope='sc2.profile',
+    redirect_uri='Your redirect uri',
+    access_token='An access token if you have one'
+)
+```
 
-    N.B. It is recommended that your Key & Secret are stored as environment variables rather than in your codebase
+N.B. It is recommended that your Key & Secret are stored as environment variables rather than in your codebase
 
 Example:
 
