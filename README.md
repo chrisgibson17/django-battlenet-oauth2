@@ -26,7 +26,7 @@ the redirect location wasn't checked.
 ```
 
 * I use http://docs.python-requests.org/ for HTTP requests.  Install by: pip install requests
-    - I'm using version 2.0.0 but any 2.* should would. (Current is 2.3)
+    - I'm using version 2.0.0 but any 2.* should work. (Current is 2.3)
 
 ## Default Values
 
@@ -58,7 +58,7 @@ bnet = BattleNet(
 
 N.B. It is recommended that your Key & Secret are stored as environment variables rather than in your codebase
 
-Example:
+##Example:
 
 ```python
 
