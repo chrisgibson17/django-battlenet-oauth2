@@ -11,7 +11,8 @@ Some caveats before you look at the example:
 
 From the Battle.net docs:
 
-```State Parameter
+```
+State Parameter
 
 When requesting an authorization code (by directing the player to battle.net), one of the parameters you should pass is the state parameter. To us, this is an opaque blob, but should be semi-random to help prevent cross-site scripting attacks. Otherwise, an evil hacker could direct someone to us, who direct to you, which causes you to do some action that the user didn't actually request. In addition, since the data is sent back to you untransformed, this can be used as a way for you to manage multiple redirect locations...but if not properly secured, could be used to redirect a user to a phishing site or other evil purpose because the redirect location wasn't checked.
 ```
