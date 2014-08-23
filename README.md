@@ -14,14 +14,46 @@ From the Battle.net docs:
 ```
 State Parameter
 
-When requesting an authorization code (by directing the player to battle.net), one of the parameters you should pass is the state parameter. To us, this is an opaque blob, but should be semi-random to help prevent cross-site scripting attacks. Otherwise, an evil hacker could direct someone to us, who direct to you, which causes you to do some action that the user didn't actually request. In addition, since the data is sent back to you untransformed, this can be used as a way for you to manage multiple redirect locations...but if not properly secured, could be used to redirect a user to a phishing site or other evil purpose because the redirect location wasn't checked.
+When requesting an authorization code (by directing the player to battle.net), one of the
+parameters you should pass is the state parameter. To us, this is an opaque blob, but should
+be semi-random to help prevent cross-site scripting attacks. Otherwise, an evil hacker could
+direct someone to us, who direct to you, which causes you to do some action that the user
+didn't actually request. In addition, since the data is sent back to you untransformed, this
+can be used as a way for you to manage multiple redirect locations...but if not properly
+secured, could be used to redirect a user to a phishing site or other evil purpose because
+the redirect location wasn't checked.
+
 ```
 
-*
+* I use http://docs.python-requests.org/ for HTTP requests.  Install by: pip install requests
+    - I'm using version 2.0.0 but any 2.* should would. (Current is 2.3)
+
+* Default values are
+    - scope     = 'wow.profile'
+    - region    = 'eu'
+    These can be overridden in the constructor (see below)
+
+## Setting up your key/secret/redirect URi
+
+By default, django-battlenet-oauth2 checks your settings.py for
+* BNET_KEY
+* BNET_SECRET
+* BNET_REDIRECT_URI
+
+However, you can override this behavior by providing `key`, `secret` and `redirect_uri` as keyword arguments to the BattleNet() constructor.
+
+If you haven't set one of these, it will throw an Exception to let you know.
 
 Example:
 
 ```python
+
+from django.http import HttpResponse
+
+from <INSTALL LOCATION>.battlenet import BattleNet
+
+from requests.exceptions import HTTPError
+
 def register(request):
 
     def state_generator(size=8, chars=string.ascii_uppercase + string.digits):
