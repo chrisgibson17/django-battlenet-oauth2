@@ -73,6 +73,11 @@ class BattleNet(object):
 
         self.access_token = access_token
 
+    def has_access_token(self):
+        if self.access_token is None:
+            return False
+        return True
+
     def redirect_to_authorization(self, state=None):
 
         if not state:
@@ -124,6 +129,36 @@ class BattleNet(object):
 
         r = requests.post(
             self._endpoints[self.scope] % self.region,
+            auth=BearerAuth(self.access_token)
+        )
+
+        r.raise_for_status()
+
+        data = r.json()
+
+        return data
+
+    def get_battletag(self):
+        if not self.access_token:
+            raise ValueError('No access token available.')
+
+        r = requests.get(
+            'https://eu.api.battle.net/account/user/battletag',
+            auth=BearerAuth(self.access_token)
+        )
+
+        r.raise_for_status()
+
+        data = r.json()
+
+        return data
+
+    def get_userid(self):
+        if not self.access_token:
+            raise ValueError('No access token available.')
+
+        r = requests.get(
+            'https://eu.api.battle.net/account/user/id',
             auth=BearerAuth(self.access_token)
         )
 

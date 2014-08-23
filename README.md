@@ -83,27 +83,47 @@ def register(request):
     if request.GET.get('error'):
         return HttpResponse(request.GET['error_description'])
 
-    bnet = BattleNet()
+    bnet = BattleNet(access_token='jnpadsv97sddd3njamyk4v6a')
 
     if not request.GET.get('code'):
-        return bnet.redirect_to_authorization(state_generator())
+        if not bnet.has_access_token():
+            return bnet.redirect_to_authorization(state_generator())
 
-    try:
-        data = bnet.retrieve_access_token(request.GET['code'])
-    except HTTPError as e:
-        print e.response.status_code
-        print e.response.json()
-        assert False
+    if not bnet.has_access_token():
+        try:
+            data = bnet.retrieve_access_token(request.GET['code'])
+        except HTTPError as e:
+            print e.response.status_code
+            print e.response.json()
+            assert False
 
     # do stuff with access token etc (save)
+    if request.GET.get('profile'):
+        try:
+            profile_data = bnet.get_battlenet_profile()
+            return HttpResponse(json.dumps(profile_data))
+        except HTTPError as e:
+            print e.response.status_code
+            print e.response.json()
+            assert False
 
-    try:
-        profile_data = bnet.get_battlenet_profile()
-        return HttpResponse(str(profile_data))
-    except HTTPError as e:
-        print e.response.status_code
-        print e.response.json()
-        assert False
+    if request.GET.get('btag'):
+        try:
+            profile_data = bnet.get_battletag()
+            return HttpResponse(json.dumps(profile_data))
+        except HTTPError as e:
+            print e.response.status_code
+            print e.response.json()
+            assert False
+
+    if request.GET.get('userid'):
+        try:
+            profile_data = bnet.get_userid()
+            return HttpResponse(json.dumps(profile_data))
+        except HTTPError as e:
+            print e.response.status_code
+            print e.response.json()
+            assert False
 
     return HttpResponse("Something is broken...")
 ```
