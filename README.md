@@ -5,7 +5,8 @@ Basic class for getting Access Token &amp; Account Information from battlenet
 
 THIS LIBRARY IS NOT ASSOCIATED WITH, OR ENDORSED BY, BLIZZARD IN ANY WAY.
 
-##Installation (Only tested on OSX but I assume Windows is the same/simailar)
+##Installation
+#####(Only tested on OSX but I assume Windows is the same/simailar)
 
 Clone the repo: git clone git@github.com:chrisgibson17/django-battlenet-oauth2.git (or use GitHub client)
 
