@@ -28,21 +28,25 @@ the redirect location wasn't checked.
 * I use http://docs.python-requests.org/ for HTTP requests.  Install by: pip install requests
     - I'm using version 2.0.0 but any 2.* should would. (Current is 2.3)
 
-* Default values are
-    - scope     = 'wow.profile'
-    - region    = 'eu'
-    These can be overridden in the constructor (see below)
+## Default Values
 
-## Setting up your key/secret/redirect URi
+Default values are
+    - key           = settings.BNET_KEY
+    - secret        = settings.BNET_SECRET
+    - redirect_uri  = settings.BNET_REDIRECT_URI
+    - scope         = 'wow.profile'
+    - region        = 'eu'
+    - access_token  = None
 
-By default, django-battlenet-oauth2 checks your settings.py for
-* BNET_KEY
-* BNET_SECRET
-* BNET_REDIRECT_URI
+    If you haven't set key/secret/redirect_uri, it will throw an Exception when you initialize the class, unless you override the default, see below.
 
-However, you can override this behavior by providing `key`, `secret` and `redirect_uri` as keyword arguments to the BattleNet() constructor.
 
-If you haven't set one of these, it will throw an Exception to let you know.
+#### Overriding default values
+    These can be overridden in the constructor like so:
+
+    bnet = BattleNet(key='Your key', secret='Your secret', region='us', scope='sc2.profile', redirect_uri='Your redirect uri', access_token='An access token if you have one')
+
+    N.B. It is recommended that your Key & Secret are stored as environment variables rather than in your codebase
 
 Example:
 
@@ -50,7 +54,7 @@ Example:
 
 from django.http import HttpResponse
 
-from <INSTALL LOCATION>.battlenet import BattleNet
+from accounts.battlenet import BattleNet
 
 from requests.exceptions import HTTPError
 
