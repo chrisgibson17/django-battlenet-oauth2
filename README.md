@@ -9,7 +9,7 @@ Some caveats before you look at the example:
 
 * `state_generator()` is for testing/example purposes only.  DO NOT USE THIS IN PRODUCTION.
 
-From the Battle.net docs:
+From the [Battle.net docs](https://dev.battle.net/docs/read/oauth):
 
 ```
 State Parameter
