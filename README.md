@@ -83,7 +83,7 @@ def register(request):
     if request.GET.get('error'):
         return HttpResponse(request.GET['error_description'])
 
-    bnet = BattleNet(access_token='jnpadsv97sddd3njamyk4v6a')
+    bnet = BattleNet()
 
     if not request.GET.get('code'):
         if not bnet.has_access_token():
