@@ -5,6 +5,8 @@ Basic class for getting Access Token &amp; Account Information from battlenet
 
 THIS LIBRARY IS NOT ASSOCIATED WITH, OR ENDORSED BY, BLIZZARD IN ANY WAY.
 
+#_I need to update this a lot _
+
 ##Installation
 #####(Only tested on OSX but I assume Windows is the same/simailar)
 
