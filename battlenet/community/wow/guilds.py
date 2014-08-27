@@ -4,6 +4,13 @@ from battlenet.community import Community
 class Guild(Community):
 
     ENDPOINT = '/wow/guild/%s/%s'
+    # Unused atm
+    _available_fields = [
+        'news',
+        'achievements',
+        'challenge',
+        'members'
+    ]
 
     def __init__(self, *args, **kwargs):
         super(Guild, self).__init__(*args, **kwargs)

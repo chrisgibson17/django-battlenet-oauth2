@@ -11,7 +11,7 @@ class PvP(Community):
     ]
 
     def __init__(self, *args, **kwargs):
-        super(Auctions, self).__init__(*args, **kwargs)
+        super(PvP, self).__init__(*args, **kwargs)
         if kwargs.get('bracket'):
             if kwargs['bracket'] not in self._bracket_options:
                 raise ValueError('Invalid bracket provided. Options are %s' % ', '.join(self._bracket_options))
