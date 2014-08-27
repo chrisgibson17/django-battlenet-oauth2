@@ -1,13 +1,5 @@
-try:
-    from django.conf import settings
-except ImportError:
-    pass
+from battlenet.community import Community
 
-from battlenet import constants
-from battlenet.community.community import Community
-
-import requests
-import warnings
 
 class Character(Community):
 
@@ -15,11 +7,15 @@ class Character(Community):
 
     def __init__(self, *args, **kwargs):
         super(Character, self).__init__(*args, **kwargs)
+
         self.name = kwargs.get('name', None)
         self.realm = kwargs.get('realm', None)
+
         if kwargs.get('fields'):
             if not isinstance(kwargs['fields'], list):
-                raise ValueError('fields argument must be a list. E.g. ["achievements", "appearance"].')
+                raise ValueError(
+                    'fields argument must be a list. E.g. ["achievements", "appearance"].'
+                )
             self.fields = kwargs['fields']
         else:
             self.fields = []
@@ -39,18 +35,16 @@ class Character(Community):
 
         if len(fields) > 0:
             if not isinstance(fields, list):
-                raise ValueError('fields argument must be a list. E.g. ["achievements", "appearance"].')
+                raise ValueError(
+                    'fields argument must be a list. E.g. ["achievements", "appearance"].'
+                )
             self.fields = fields
 
-        params = {
-            'locale': self.locale,
-            'apikey': self.apikey
-        }
-
         if len(self.fields) > 0:
-            params['fields'] = ','.join(self.fields)
+            self.add_params(
+                {
+                    'fields': ','.join(self.fields)
+                }
+            )
 
-        response = self._make_request(self.ENDPOINT % (self.realm, self.name), params)
-
-        return response
-
+        return self.make_request(self.ENDPOINT % (self.realm, self.name))
