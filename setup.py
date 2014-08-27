@@ -18,7 +18,10 @@ setup(name='battlenet',
         'battlenet.community.wow.pvp',
         'battlenet.community.wow.quests',
         'battlenet.community.wow.realms',
+        'battlenet.community.wow.recipe',
         'battlenet.community.wow.spells',
         'battlenet.community.wow.data',
+        'battlenet.community.sc2',
+        'battlenet.community.d3'
     ],
 )
