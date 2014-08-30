@@ -14,34 +14,16 @@ Clone the repo: git clone git@github.com:chrisgibson17/django-battlenet-oauth2.g
 
 Navigate to the local repo and run: (sudo) python setup.py install
 
-_Some caveats before you look at the example:_
+## OAuth2
 
-* `state_generator()` is for testing/example purposes only.  DO NOT USE THIS IN PRODUCTION.
-
-From the [Battle.net docs](https://dev.battle.net/docs/read/oauth):
-
-```
-State Parameter
-
-When requesting an authorization code (by directing the player to battle.net), one of the
-parameters you should pass is the state parameter. To us, this is an opaque blob, but should
-be semi-random to help prevent cross-site scripting attacks. Otherwise, an evil hacker could
-direct someone to us, who direct to you, which causes you to do some action that the user
-didn't actually request. In addition, since the data is sent back to you untransformed, this
-can be used as a way for you to manage multiple redirect locations...but if not properly
-secured, could be used to redirect a user to a phishing site or other evil purpose because
-the redirect location wasn't checked.
-
-```
-
-* I use http://docs.python-requests.org/ for HTTP requests.  Install by: pip install requests
-    - I'm using version 2.0.0 but any 2.* should work. (Current is 2.3)
+* I use http://requests-oauthlib.readthedocs.org/en/latest/oauth2_workflow.html for OAuth2 interaction.  Install by: pip install requests requests_oauthlib
+    - I'm going to look into having this auto install when you run setup.py but havn't done it yet
 
 ## Default Values
 
 Default values are:
-* key           = settings.BNET_KEY
-* secret        = settings.BNET_SECRET
+* key           = settings.BNET_KEY **
+* secret        = settings.BNET_SECRET **
 * redirect_uri  = settings.BNET_REDIRECT_URI
 * scope         = 'wow.profile'
 * region        = 'eu'
@@ -50,9 +32,9 @@ Default values are:
 If you haven't set key/secret/redirect_uri, it will throw an Exception when you initialize
 the class, unless you override the default, see below.
 
+_ N.B. settings.BNET_KEY and settings.BNET_SECRET should be loaded from environment variables _
 
-#### Overriding default values
-These can be overridden in the constructor like so:
+Override default values like so:
 
 ```python
 bnet = BattleNet(
@@ -65,67 +47,74 @@ bnet = BattleNet(
 )
 ```
 
-N.B. It is recommended that your Key & Secret are stored as environment variables rather than in your codebase
+## Examples:
 
-##Example:
+#### Get Redirect URL & redirect to it
 
 ```python
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
-from battlenet import BattleNet
+from battlenet.oauth2 import BattlNetOAuth2
 
-from requests.exceptions import HTTPError
+def redirect_to_bnet(request):
 
-def register(request):
+    bnet = BattleNetOAuth2()
+    url, state = bnet.get_authorization_url()
+    # save state somewhere for checking the redirect response against
+    request.session['state'] = state
+    return HttpResponseRedirect(url)
 
-    def state_generator(size=8, chars=string.ascii_uppercase + string.digits):
-        return ''.join(random.choice(chars) for _ in range(size))
+```
 
-    if request.GET.get('error'):
-        return HttpResponse(request.GET['error_description'])
+#### Get access token using access code
 
-    bnet = BattleNet()
+```python
 
-    if not request.GET.get('code'):
-        if not bnet.has_access_token():
-            return bnet.redirect_to_authorization(state_generator())
+def get_acces_token(request):
 
-    if not bnet.has_access_token():
-        try:
-            data = bnet.retrieve_access_token(request.GET['code'])
-        except HTTPError as e:
-            print e.response.status_code
-            print e.response.json()
-            assert False
+    if request.GET.get('code'):
+        if request.GET.get('state') and request.session.get('state'):
+            if request.GET['state'] == request.session['state']:
+                bnet = BattleNetOAuth2()
+                data = bnet.retrieve_access_token(request.GET['code'])
+                if data.get('access_token'):
+                    print data['access_token']
 
-    # do stuff with access token etc (save)
-    if request.GET.get('profile'):
-        try:
-            profile_data = bnet.get_battlenet_profile()
-            return HttpResponse(json.dumps(profile_data))
-        except HTTPError as e:
-            print e.response.status_code
-            print e.response.json()
-            assert False
+```
 
-    if request.GET.get('btag'):
-        try:
-            profile_data = bnet.get_battletag()
-            return HttpResponse(json.dumps(profile_data))
-        except HTTPError as e:
-            print e.response.status_code
-            print e.response.json()
-            assert False
+#### Request Battle.net Profile
 
-    if request.GET.get('userid'):
-        try:
-            profile_data = bnet.get_userid()
-            return HttpResponse(json.dumps(profile_data))
-        except HTTPError as e:
-            print e.response.status_code
-            print e.response.json()
-            assert False
+```python
 
-    return HttpResponse("Something is broken...")
+def get_bnet_profile(request):
+
+    bnet = BattleNetOAuth2(scope='sc2.profile', access_token='access_token goes here')
+    profile = bnet.get_profile(access_token='or here if you want to make multiple requests with same BNet object')
+    print profile
+
+```
+
+#### Request Battletag
+
+```python
+
+def get_battletag(request):
+
+    bnet = BattleNetOAuth2(access_token='access_token goes here')
+    btag = bnet.get_battletag(access_token='or here')
+    print btag
+
+```
+
+#### Request Account ID
+
+```python
+
+def get_accountid(request):
+
+    bnet = BattleNetOAuth2(access_token='access_token goes here')
+    account = bnet.get_account_id(access_token='or here')
+    print account
+
 ```

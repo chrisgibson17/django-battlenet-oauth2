@@ -24,7 +24,7 @@ LOCALES = [
     'zh'
 ]
 
-BNET_AUTH_URI = 'https://%s.battle.net/oauth/authorize'
-BNET_TOKEN_URI = 'https://%s.battle.net/oauth/token'
+BNET_AUTH_URL = 'https://%s.battle.net/oauth/authorize'
+BNET_TOKEN_URL = 'https://%s.battle.net/oauth/token'
 
 BASE_ENDPOINT_URL = 'https://%s.api.battle.net'

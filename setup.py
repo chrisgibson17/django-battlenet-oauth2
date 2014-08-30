@@ -1,13 +1,17 @@
 from distutils.core import setup
+from pip.req import parse_requirements
+import os
+
+
+# dirname = os.path.dirname(os.path.realpath(__file__))
+# print dirname
+# install_reqs = parse_requirements(dirname+'/requirements.txt')
+# reqs = [str(ir.req) for ir in install_reqs]
 setup(name='battlenet',
     version='0.1',
     py_modules=[
         'battlenet.constants',
-        'battlenet.oauth.headers',
-        'battlenet.oauth.oauth',
-        'battlenet.oauth.profile',
-        'battlenet.oauth.battletag',
-        'battlenet.oauth.account',
+        'battlenet.oauth2',
         'battlenet.community.wow.achievements',
         'battlenet.community.wow.auctions',
         'battlenet.community.wow.battlepets',
@@ -24,4 +28,5 @@ setup(name='battlenet',
         'battlenet.community.sc2',
         'battlenet.community.d3'
     ],
+    packages=['battlenet', 'battlenet.oauth2', 'battlenet.community']
 )
