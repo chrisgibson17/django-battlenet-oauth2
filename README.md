@@ -5,8 +5,6 @@ Basic class for getting Access Token &amp; Account Information from battlenet
 
 THIS LIBRARY IS NOT ASSOCIATED WITH, OR ENDORSED BY, BLIZZARD IN ANY WAY.
 
-#_I need to update this a lot _
-
 ##Installation
 #####(Only tested on OSX but I assume Windows is the same/simailar)
 
@@ -32,7 +30,7 @@ Default values are:
 If you haven't set key/secret/redirect_uri, it will throw an Exception when you initialize
 the class, unless you override the default, see below.
 
-_ N.B. settings.BNET_KEY and settings.BNET_SECRET should be loaded from environment variables _
+_N.B. settings.BNET_KEY and settings.BNET_SECRET should be loaded from environment variables_
 
 Override default values like so:
 
@@ -90,7 +88,8 @@ def get_acces_token(request):
 def get_bnet_profile(request):
 
     bnet = BattleNetOAuth2(scope='sc2.profile', access_token='access_token goes here')
-    profile = bnet.get_profile(access_token='or here if you want to make multiple requests with same BNet object')
+    profile = bnet.get_profile(access_token='or here if you want to make multiple' +
+        'requests with same BNet object')
     print profile
 
 ```
