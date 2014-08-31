@@ -10,7 +10,7 @@ class ChallengeMode(Community):
 
     def get(self, realm=None):
         if realm:
-            self.realm = realm
+            self.request_type = realm
 
         # ??? for region
         return self.make_request(self.ENDPOINT % self.request_type)

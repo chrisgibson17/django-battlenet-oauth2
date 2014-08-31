@@ -50,9 +50,9 @@ class BattlePets(Community):
             if level:
                 self.optional_params['level'] = level
             if  quality_id:
-                self.optional_params['quality_id'] = quality_id
+                self.optional_params['qualityId'] = quality_id
             if breed_id:
-                self.optional_params['breed_id'] = breed_id
+                self.optional_params['breedId'] = breed_id
 
         final_params = {}
         for key, value in self.optional_params.iteritems():
