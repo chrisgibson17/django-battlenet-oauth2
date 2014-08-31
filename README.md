@@ -1,7 +1,7 @@
 django-battlenet-oauth2
 =======================
 
-Basic class for getting Access Token &amp; Account Information from battlenet
+Library for interaction with Battle.net OAuth2 and Community APIs
 
 THIS LIBRARY IS NOT ASSOCIATED WITH, OR ENDORSED BY, BLIZZARD IN ANY WAY.
 
