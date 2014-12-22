@@ -118,7 +118,7 @@ class BattleNetOAuth2(object):
         if access_token:
             self._set_token(access_token)
 
-        return self._make_request('/account/user/battlenet')
+        return self._make_request('/account/user/battletag')
 
     def get_profile(self, access_token=None):
         if access_token:
