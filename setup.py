@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-setup(name='battlenet',
+setup(name='django-battlenet',
     license='MIT',
     version='0.1',
     py_modules=[
