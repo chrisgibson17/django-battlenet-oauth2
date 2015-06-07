@@ -26,7 +26,16 @@ setup(name='battlenet',
         'battlenet.community.wow.spells',
         'battlenet.community.wow.data',
         'battlenet.community.sc2',
-        'battlenet.community.d3'
+        'battlenet.community.d3.artisan',
+        'battlenet.community.d3.career',
+        'battlenet.community.d3.follower',
+        'battlenet.community.d3.hero',
+        'battlenet.community.d3.item',
     ],
-    packages=['battlenet', 'battlenet.oauth2', 'battlenet.community']
+    packages=[
+        'battlenet',
+        'battlenet.oauth2',
+        'battlenet.community'
+    ]
+
 )
