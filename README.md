@@ -7,11 +7,7 @@ THIS LIBRARY IS NOT ASSOCIATED WITH, OR ENDORSED BY, BLIZZARD IN ANY WAY.
 
 #Installation
 
-#####(Only tested on OSX but I assume Windows is the same/simailar)
-
-Clone the repo: git clone git@github.com:chrisgibson17/django-battlenet-oauth2.git (or use GitHub client)
-
-Navigate to the local repo and run: (sudo) python setup.py install
+    pip install django-battlenet
 
 # OAuth2
 

@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-setup(name='battlenet',
+setup(name='django-battlenet',
     license='MIT',
     version='0.1',
     py_modules=[
@@ -26,9 +26,9 @@ setup(name='battlenet',
     install_requires=[
         'requests_oauth2'
     ],
-    description="API wrapper for Blizzards Community APIs & oAuth login",
-    author="Chris Gibson",
-    author_email="chris@chrisgibson.io",
+    description='API wrapper for Blizzards Community APIs & oAuth login',
+    author='Chris Gibson',
+    author_email='chris@chrisgibson.io',
     url='https://github.com/chrisgibson17/django-battlenet-oauth2',
-    download_url = 'https://github.com/chrisgibson17/django-battlenet-oauth2/0.1',
+    download_url= 'https://github.com/chrisgibson17/django-battlenet-oauth2/archive/master.tar.gz',
 )
