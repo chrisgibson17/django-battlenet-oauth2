@@ -1,13 +1,7 @@
 from distutils.core import setup
-from pip.req import parse_requirements
-import os
 
-
-# dirname = os.path.dirname(os.path.realpath(__file__))
-# print dirname
-# install_reqs = parse_requirements(dirname+'/requirements.txt')
-# reqs = [str(ir.req) for ir in install_reqs]
 setup(name='battlenet',
+    license='MIT',
     version='0.1',
     py_modules=[
         'battlenet.constants',
@@ -28,5 +22,13 @@ setup(name='battlenet',
         'battlenet.community.sc2',
         'battlenet.community.d3'
     ],
-    packages=['battlenet', 'battlenet.oauth2', 'battlenet.community']
+    packages=['battlenet', 'battlenet.oauth2', 'battlenet.community'],
+    install_requires=[
+        'requests_oauth2'
+    ],
+    description="API wrapper for Blizzards Community APIs & oAuth login",
+    author="Chris Gibson",
+    author_email="chris@chrisgibson.io",
+    url='https://github.com/chrisgibson17/django-battlenet-oauth2',
+    download_url = 'https://github.com/chrisgibson17/django-battlenet-oauth2/0.1',
 )

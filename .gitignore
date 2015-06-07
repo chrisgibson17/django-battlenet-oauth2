@@ -1,2 +1,8 @@
 *.pyc
 build/*
+.idea/.name
+.idea/django-battlenet-oauth2.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/vcs.xml
