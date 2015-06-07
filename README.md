@@ -1,4 +1,4 @@
-/django-battlenet-oauth2
+django-battlenet-oauth2
 =======================
 
 Library for interaction with Battle.net OAuth2 and Community APIs
