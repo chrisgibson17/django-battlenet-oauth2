@@ -2,9 +2,9 @@ from distutils.core import setup
 
 setup(name='django-battlenet',
     license='MIT',
-    version='0.0.8',
+    version='0.0.1',
     packages=['battlenet'],
-    description='API wrapper for Blizzards Community REST APIs & oAuth2 login',
+    description='API wrapper for Blizzards Community REST APIs & OAuth2 login',
     author='Chris Gibson',
     author_email='chris@chrisgibson.io',
     url='https://github.com/chrisgibson17/django-battlenet-oauth2',
