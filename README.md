@@ -52,7 +52,7 @@ BattleNet(
 
 from django.http import HttpResponseRedirect
 
-from battlenet.oauth2 import BattlNetOAuth2
+from battlenet.oauth2 import BattleNetOAuth2
 
 def redirect_to_bnet(request):
 
@@ -68,7 +68,7 @@ def redirect_to_bnet(request):
 
 ```python
 
-from battlenet.oauth2 import BattlNetOAuth2
+from battlenet.oauth2 import BattleNetOAuth2
 
 def get_access_token(request):
 
@@ -85,7 +85,7 @@ def get_access_token(request):
 
 ```python
 
-from battlenet.oauth2 import BattlNetOAuth2
+from battlenet.oauth2 import BattleNetOAuth2
 
 def get_bnet_profile(request):
 
@@ -99,7 +99,7 @@ def get_bnet_profile(request):
 
 ```python
 
-from battlenet.oauth2 import BattlNetOAuth2
+from battlenet.oauth2 import BattleNetOAuth2
 
 def get_battletag(request):
 
@@ -112,7 +112,7 @@ def get_battletag(request):
 
 ```python
 
-from battlenet.oauth2 import BattlNetOAuth2
+from battlenet.oauth2 import BattleNetOAuth2
 
 def get_accountid(request):
 
