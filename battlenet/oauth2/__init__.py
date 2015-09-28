@@ -54,8 +54,10 @@ class BattleNetOAuth2(object):
             raise ValueError(
                 "Invalid scope provided.  Region must be one of 'wow.profile' or 'sc2.profile'.")
 
-        self.access_token = access_token
+        self.access_token = None
         self.oauth = None
+        if access_token:
+          self._set_token(access_token)
 
     def get_authorization_url(self):
 
