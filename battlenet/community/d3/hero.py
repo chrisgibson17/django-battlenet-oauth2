@@ -17,6 +17,6 @@ class Hero(Community):
         if not self.battletag:
             raise ValueError("BattleTag required.")
         if not self.hero_id:
-            raise ValueError("Hero ID required"
+            raise ValueError("Hero ID required")
 
         return self.make_request(self.ENDPOINT % (self.battletag, self.hero_id))
