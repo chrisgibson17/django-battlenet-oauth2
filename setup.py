@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(name='django-battlenet',
       license='MIT',
-      version='0.0.2',
+      version='0.0.3',
       packages=['battlenet',
                 'battlenet.oauth2',
                 'battlenet.community',
