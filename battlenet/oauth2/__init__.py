@@ -54,7 +54,10 @@ class BattleNetOAuth2(object):
             raise ValueError(
                 "Invalid scope provided.  Region must be one of 'wow.profile' or 'sc2.profile'.")
 
-        self.access_token = access_token
+        self.access_token = None
+        self.oauth = None
+        if access_token:
+          self._set_token(access_token)
 
     def get_authorization_url(self):
 
@@ -93,11 +96,11 @@ class BattleNetOAuth2(object):
         self.access_token = token_data['access_token']
         return token_data
 
-    def _set_token(self, token):
+    def _set_token(self, token, token_type="bearer"):
         self.access_token = token
         if not self.oauth:
             self.oauth = OAuth2Session(
-                self.BNET_KEY, redirect_uri=self.BNET_REDIRECT_URI, token=token)
+                self.BNET_KEY, redirect_uri=self.BNET_REDIRECT_URI, token={'access_token': token, 'token_type': token_type})
         else:
             self.oauth.token = token
 
